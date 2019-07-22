@@ -18,9 +18,11 @@ Central infrastructure has advantages and drawbacks. The drawbacks are:
   resources and effort. It is very difficult to run a community project when
   contribution is not easily possible.
 
-
+We already have an ipv6-only network and the ability to distribute multicast to every node on the net.
 
 ## Ideas
+
+All of these ideas are designed for ipv6-only networks.
 
 ### move more exit functionality into nodes
 
