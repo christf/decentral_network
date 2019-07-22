@@ -11,7 +11,7 @@ Central infrastructure has advantages and drawbacks. The drawbacks are:
 * the infrastructure must match what is in the firmware. This split causes problems:
 
   * different technologies are used. This makes it hard to maintain the network as a whole.
-  * the packaging for mesh protocol must be in sync for multiple platforms. This is a nuissance
+  * the packaging for mesh protocol must be in sync for multiple platforms. This is a nuisance
 
 * At a scale of a few hundred nodes, the infrastructure in the data center is 
   already quite specialized. This makes it difficult to contribute individual 
@@ -77,7 +77,7 @@ This has the drawback of establishing the central map server as single point of 
 
 ##### Option 2: query a DHT
 
-A DHT is used in peer to peer networks to store data. We could query this DHT for possible exit-nodes. Kadnode implements DNS-over-DHT and is fairly simlar
+A DHT is used in peer to peer networks to store data. We could query this DHT for possible exit-nodes. Kadnode implements DNS-over-DHT and could be re-used.
 
 
 ##### Option 3: use DNS to keep a list of exit-nodes.
