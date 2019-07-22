@@ -19,57 +19,29 @@ Central infrastructure has advantages and drawbacks. The drawbacks are:
   contribution is not easily possible.
 
 
-## current state
 
-### Nodes
-
-To form a network of the current Freifunk stack, a star-like topology is 
-created by using central VPN gateways. These will accept VPN connections from 
-nodes and offload traffic to some exit. This could be called a centralized 
-design.
-
-
-### Exits
-
-Exits are part of the freifunk network. Exits route traffic from the Freifunk 
-network towards the internet. For this they expose a default route. Upstream is 
-connected either via yet another VPN or via a Freifunk Provider or via direct 
-exit.
-
-
-## future state
-
-### Nodes
-
-Nodes in the future are like current, however the ability to expose a default 
-route is added.
-
-### Exits
-
-Exits are dedicated to handling the uplink connection where traffic is 
-offloaded. Exits are not part of the Freifunk network.
-
-
-## Implications
-
-* traffic may leave the Freifunk network at any node should their operator 
-  chose so.
-* source-specific routing must be used on all nodes
-
-## Implementation
-
-### Prefixd
-
-We already have a daemon that decides which prefixes are announced. thus 
-prefix-sharing should already be possible. Although it is likely broken in 
-subtle ways
-
-
-## Outlook
+## Ideas
 
 ### move more exit functionality into nodes
 
-* Ability to open gre-tunnels for exiting traffic via some provider?
+#### Node operators should be able to chose their node to become an Exit
+
+traffic may leave the Freifunk network at any node should their operator 
+chose so. This would de-centralize the delivery of internet services.
+
+We already have a daemon that decides which prefixes are announced. thus 
+prefix-sharing should already be possible. Although it is likely broken in 
+subtle ways and likely needs fixing. So in theory, this is already possible.
+In practice it is untested and it is broken as long as one single node in the 
+Freifunk network deploys a default route without a from stanza. The feature 
+thus can only be tested with nodes that do not have a connection to existing 
+networks.
+
+#### Ability to open gre-tunnels for exiting traffic via some provider?
+
+We already have gre kernel modules, configuration would be device specific. Why 
+don't we just include the relevant gre modules in our firmware builds for the 
+larger targets? This would be a quick win.
 
 ### Change topology by allowing peer-to-peer VPN connections
 
@@ -77,3 +49,19 @@ The nodes are organized around central nodes at the moment. This is due to the b
 
 * Nodes with uplink that are part of the network should be able to establish additional VPN  links to build less of a star-based system.
 * Nodes with uplink that are not part of the network should be able to find other nodes that already are.
+
+This eliminates a single point of failure in current Freifunk networks.
+
+#### WG-broker-Server
+
+The wireguard broker server needs to be enhanced to be able to run on gluon to allow peer-to-peer VPN connections.
+
+#### Linkfinder
+
+We need a mechanism to identify possible VPN link endpoints.
+
+### Load
+
+At the moment the design of respondd is keeping us from having an efficient implementation of a babel statistics provider that is required for large networks. We'll have to come up with something else. See respondd.md for a discussion of these.
+
+
