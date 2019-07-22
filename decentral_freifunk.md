@@ -28,7 +28,7 @@ All of these ideas are designed for ipv6-only networks.
 
 #### Node operators should be able to chose their node to become an Exit
 
-traffic may leave the Freifunk network at any node should their operator 
+Traffic may leave the Freifunk network at any node should their operator 
 chose so. This would de-centralize the delivery of internet services.
 
 We already have a daemon that decides which prefixes are announced. thus 
@@ -38,6 +38,8 @@ In practice it is untested and it is broken as long as one single node in the
 Freifunk network deploys a default route without a from stanza. The feature 
 thus can only be tested with nodes that do not have a connection to existing 
 networks.
+
+Nodes providing this capability will be referred to as _exit-nodes_.
 
 #### Ability to open gre-tunnels for exiting traffic via some provider?
 
@@ -52,7 +54,12 @@ The nodes are organized around central nodes at the moment. This is due to the b
 * Nodes with uplink that are part of the network should be able to establish additional VPN  links to build less of a star-based system.
 * Nodes with uplink that are not part of the network should be able to find other nodes that already are.
 
-This eliminates a single point of failure in current Freifunk networks.
+This eliminates a single point of failure in current Freifunk networks: the gateways.
+
+
+Assuming we have unconnected wlan mesh clouds. For each mesh clouds we have at least one node that provides uplink capabilities. This node can and must establish VPN connections to allow connectivity between mesh clouds. These uplink-nodes will use Linkfinder to learn a viable VPN endpoint. Each uplink-enabled node will create multiple VPN connections. At least one of them must target an exit-node.
+
+All exit-nodes will form a tight mesh themselves via VPN.
 
 #### WG-broker-Server
 
@@ -64,6 +71,8 @@ We need a mechanism to identify possible VPN link endpoints.
 
 ### Load
 
-At the moment the design of respondd is keeping us from having an efficient implementation of a babel statistics provider that is required for large networks. We'll have to come up with something else. See respondd.md for a discussion of these.
-
+At the moment the design of respondd is keeping us from having an efficient
+implementation of a babel statistics provider that is required for large 
+networks. We'll have to come up with something else. See respondd.md for a 
+discussion of these.
 
