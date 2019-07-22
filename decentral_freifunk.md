@@ -67,7 +67,42 @@ The wireguard broker server needs to be enhanced to be able to run on gluon to a
 
 #### Linkfinder
 
-We need a mechanism to identify possible VPN link endpoints.
+This is the tricky bit. We need a mechanism to identify possible VPN link endpoints.
+
+##### Option 1: Query the Map
+
+Every uplink-node could query the map for the topology of the existing network using its WAN-interface and then use that information to determine one exit-node to connect to. After this the local mesh-cloud becomes part of the network and is able to establish more VPN links as required.
+
+This has the drawback of establishing the central map server as single point of failure. For a system of that criticality, its software stack is more complex than what I would like.
+
+##### Option 2: query a DHT
+
+A DHT is used in peer to peer networks to store data. We could query this DHT for possible exit-nodes. Kadnode implements DNS-over-DHT and is fairly simlar
+
+
+##### Option 3: use DNS to keep a list of exit-nodes.
+
+DNS is fairly simple and does not require additional software so it seems like 
+a good fit if the following question can be answered:
+
+_How to keep the data about exit-nodes current in a de-centralized way?_
+
+One way to do this is to maintain the records using a git repository. This 
+however would require the users wanting to install an exit-node to raise PR via 
+git. It likely will not happen. Really the trigger should be setting the 
+exit-node-option on the device itself.
+
+##### Option 4: Dead-Man-Switch via http
+
+Each node that is capable of being a VPN endpoint will query a certain URL on a 
+regular basis. From the source-IP-addresses of these queries, the server will 
+compile a list When a nodes does not send a query for a while, it will be 
+removed from that list. That list could be downloaded via http by nodes who 
+attempt to join the network.
+
+##### Option 5: <your idea here>
+
+What else could we do?
 
 ### Load
 
