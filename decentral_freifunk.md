@@ -60,9 +60,16 @@ The nodes are organized around central nodes at the moment. This is due to the b
 This eliminates a single point of failure in current Freifunk networks: the gateways.
 
 
-Assuming we have unconnected wlan mesh clouds. For each mesh clouds we have at least one node that provides uplink capabilities. This node can and must establish VPN connections to allow connectivity between mesh clouds. These uplink-nodes will use Linkfinder to learn a viable VPN endpoint. Each uplink-enabled node will create multiple VPN connections. At least one of them must target an exit-node.
+#### Assumptions
 
-All exit-nodes will form a tight mesh themselves via VPN.
+Assuming we have unconnected wlan mesh clouds.
+
+* For each mesh clouds we have at least one node that provides uplink capabilities. This node can and must establish VPN connections to allow connectivity between mesh clouds. These uplink-nodes will use Linkfinder to learn a viable VPN endpoint. Each uplink-enabled node will create multiple VPN connections. At least one of them should target an exit-node.
+* more than 90% of the traffic inside a Freifunk network is routed towards the internet. This means the exit-nodes will see 90% of the traffic.
+* All uplink-nodes should have the capability to become an exit-node. We are  assuming that only a fraction of the regular uplink-nodes will actually be exits. Instead most exits will run in a data-center somewhere, much similar to the current gateways
+* The exit-nodes are tightly-meshed via VPN. When the exit-functionality breaks down to 
+  whatever reason, the traffic should be re-routed via another exit with no additional hops.
+
 
 #### WG-broker-Server
 
@@ -99,9 +106,9 @@ exit-node-option on the device itself.
 
 Each node that is capable of being a VPN endpoint will query a certain URL on a 
 regular basis. From the source-IP-addresses of these queries, the server will 
-compile a list When a nodes does not send a query for a while, it will be 
-removed from that list. That list could be downloaded via http by nodes who 
-attempt to join the network.
+compile a list of existing exit-nodes. When a nodes does not send a query for a 
+while, it will be removed from that list. That list could be downloaded via 
+http by nodes who attempt to join the network.
 
 ##### Option 5: <your idea here>
 
