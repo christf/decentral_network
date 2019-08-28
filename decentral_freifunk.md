@@ -114,13 +114,6 @@ http by nodes who attempt to join the network.
 
 What else could we do?
 
-### Load
-
-At the moment the design of respondd is keeping us from having an efficient
-implementation of a babel statistics provider that is required for large 
-networks. We'll have to come up with something else. See respondd.md for a 
-discussion of these.
-
 
 # Terminology
 
