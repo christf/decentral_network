@@ -1,3 +1,6 @@
+Option 2 has been implemented and is raised as PR towards the gluon project
+
+
 # Respondd vs babel vs efficiency
  
 The current form of the plugin concept doesn't allow long running socket connections because from the plugin there is no access to the event loop. 
