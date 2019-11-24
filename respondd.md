@@ -28,3 +28,7 @@ Register a new thread in a __attribute__(constructed) function in the plugin
 (see example in libplatformhelper). This thread could then implement it's own 
 event loop, monitor the babel socket and maintain the data structures that will 
 be used to reply to any queries respondd might receive.
+
+# Solution
+Option 2 was implemented and it helps a lot.
+Babeld is still bursty and provides much more information than is required by respondd. The next step is trimming down that information in babel and being able to monitor neighbour changes exclusively. This has been raised to upstream babeld, so there will be another round of optimizations soon.
