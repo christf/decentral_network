@@ -32,13 +32,10 @@ functionality from the data center into nodes and thus requiring less and less c
 Traffic may leave the Freifunk network at any node should their operator 
 chose so. This would de-centralize the delivery of internet services.
 
-We already have a daemon that decides which prefixes are announced. thus 
-prefix-sharing should already be possible. Although it is likely broken in 
-subtle ways and likely needs fixing. So in theory, this is already possible.
-In practice it is untested and it is broken as long as one single node in the 
-Freifunk network deploys a default route without a from stanza. The feature 
-thus can only be tested with nodes that do not have a connection to existing 
-networks.
+We already have a daemon that decides which prefixes are announced. Thus 
+prefix-sharing should already be possible. 
+In practice the feature has not seen wide testing and it is known to break 
+when one single node on the network distributes routes without a from stanza.
 
 Nodes providing this capability will be referred to as _exit-nodes_.
 
